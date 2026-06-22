@@ -115,3 +115,54 @@
     }
   }
 }
+
+// §5 Reddit post card
+.post-listings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-view-toggle {
+  align-self: flex-start;
+}
+
+.post-listing-card {
+  background-color: #ffffff;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  transition: border-color 0.1s ease;
+
+  &:hover {
+    border-color: #898989;
+  }
+}
+
+// Compact rows: tighter padding, joined borders
+.post-listing--compact {
+  gap: 0;
+
+  .post-listing-card {
+    border-radius: 0;
+    border-top: none;
+    padding: 0.25rem 0.75rem;
+
+    &:hover {
+      border-color: $border-color;
+      background-color: $gray-100;
+    }
+
+    &:first-of-type {
+      border-top: 1px solid $border-color;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+
+    &:last-of-type {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+}

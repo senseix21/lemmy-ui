@@ -1,4 +1,4 @@
-import { Component } from "inferno";
+import { Component, linkEvent } from "inferno";
 import { T } from "inferno-i18next-dess";
 import { Link } from "inferno-router";
 import {
@@ -28,6 +28,28 @@ import {
 import { I18NextService } from "../../services";
 import { PostListing } from "./post-listing";
 import { RequestState } from "../../services/HttpService";
+import { Icon } from "../common/icon";
+
+type ViewMode = "card" | "compact";
+const VIEW_MODE_KEY = "lemmy-reddit-view-mode";
+
+function readStoredViewMode(): ViewMode {
+  if (typeof localStorage === "undefined") {
+    return "card";
+  }
+  return localStorage.getItem(VIEW_MODE_KEY) === "compact" ? "compact" : "card";
+}
+
+interface PostListingsState {
+  viewMode: ViewMode;
+}
+
+function handleViewClick(data: { i: PostListings; mode: ViewMode }) {
+  if (typeof localStorage !== "undefined") {
+    localStorage.setItem(VIEW_MODE_KEY, data.mode);
+  }
+  data.i.setState({ viewMode: data.mode });
+}
 
 interface PostListingsProps {
   posts: PostView[];
@@ -59,11 +81,26 @@ interface PostListingsProps {
   onHidePost(form: HidePost): Promise<void>;
 }
 
-export class PostListings extends Component<PostListingsProps, any> {
+export class PostListings extends Component<
+  PostListingsProps,
+  PostListingsState
+> {
   duplicatesMap = new Map<number, PostView[]>();
+
+  state: PostListingsState = {
+    viewMode: "card",
+  };
 
   constructor(props: any, context: any) {
     super(props, context);
+  }
+
+  componentDidMount() {
+    // Read persisted preference on the client only (avoids SSR mismatch).
+    const stored = readStoredViewMode();
+    if (stored !== this.state.viewMode) {
+      this.setState({ viewMode: stored });
+    }
   }
 
   get posts() {
@@ -73,11 +110,41 @@ export class PostListings extends Component<PostListingsProps, any> {
   }
 
   render() {
+    const { viewMode } = this.state;
     return (
-      <div className="post-listings">
+      <div
+        className={`post-listings${viewMode === "compact" ? " post-listing--compact" : ""}`}
+      >
         {this.posts.length > 0 ? (
-          this.posts.map((post_view, idx) => (
-            <>
+          <>
+            <div
+              className="btn-group btn-group-sm mb-2 post-view-toggle"
+              role="group"
+              aria-label="Post view mode"
+            >
+              <button
+                type="button"
+                className={`btn btn-outline-secondary${viewMode === "card" ? " active" : ""}`}
+                onClick={linkEvent({ i: this, mode: "card" }, handleViewClick)}
+                title="Card view"
+              >
+                <Icon icon="image" classes="icon-inline me-1" />
+                Card
+              </button>
+              <button
+                type="button"
+                className={`btn btn-outline-secondary${viewMode === "compact" ? " active" : ""}`}
+                onClick={linkEvent(
+                  { i: this, mode: "compact" },
+                  handleViewClick,
+                )}
+                title="Compact view"
+              >
+                <Icon icon="list" classes="icon-inline me-1" />
+                Compact
+              </button>
+            </div>
+            {this.posts.map(post_view => (
               <PostListing
                 post_view={post_view}
                 crossPosts={this.duplicatesMap.get(post_view.post.id)}
@@ -107,9 +174,8 @@ export class PostListings extends Component<PostListingsProps, any> {
                 onMarkPostAsRead={this.props.onMarkPostAsRead}
                 onHidePost={this.props.onHidePost}
               />
-              {idx + 1 !== this.posts.length && <hr className="my-3" />}
-            </>
-          ))
+            ))}
+          </>
         ) : (
           <>
             <div>{I18NextService.i18n.t("no_posts")}</div>

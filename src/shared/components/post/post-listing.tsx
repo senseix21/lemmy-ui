@@ -801,7 +801,7 @@ export class PostListing extends Component<PostListingProps, PostListingState> {
       <>
         {/* The mobile view*/}
         <div className="d-block d-sm-none">
-          <article className="row post-container">
+          <article className="row post-container post-listing-card">
             <div className="col-12">
               {this.createdLine()}
 
@@ -816,7 +816,7 @@ export class PostListing extends Component<PostListingProps, PostListingState> {
 
         {/* The larger view*/}
         <div className="d-none d-sm-block">
-          <article className="row post-container">
+          <article className="row post-container post-listing-card">
             {this.isInteractable && (
               <div className="col flex-grow-0">
                 <VoteButtons

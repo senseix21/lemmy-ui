@@ -11965,4 +11965,48 @@ textarea.form-control-lg {
   background-color: #edeff1;
 }
 
+.post-listings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-view-toggle {
+  align-self: flex-start;
+}
+
+.post-listing-card {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  transition: border-color 0.1s ease;
+}
+.post-listing-card:hover {
+  border-color: #898989;
+}
+
+.post-listing--compact {
+  gap: 0;
+}
+.post-listing--compact .post-listing-card {
+  border-radius: 0;
+  border-top: none;
+  padding: 0.25rem 0.75rem;
+}
+.post-listing--compact .post-listing-card:hover {
+  border-color: #cccccc;
+  background-color: #f6f7f8;
+}
+.post-listing--compact .post-listing-card:first-of-type {
+  border-top: 1px solid #cccccc;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.post-listing--compact .post-listing-card:last-of-type {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
 /*# sourceMappingURL=reddit.css.map */
