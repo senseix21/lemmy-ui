@@ -68,7 +68,7 @@ const listener = server.listen(Number(port), hostname, () => {
 
   setupDateFns();
   console.log(
-    `Lemmy-ui v${VERSION} started listening on http://${hostname}:${port}`,
+    `noxgram-ui v${VERSION} started listening on http://${hostname}:${port}`,
   );
 });
 
@@ -86,7 +86,7 @@ function shutdown(signal: string, value: number) {
   // incoming connections with a HTTP 503 error while shutting down.
   // Otherwise the connection count may not reach zero before timeout.
   listener.close(() => {
-    console.log(`Lemmy stopped by ${signal} with value ${value}`);
+    console.log(`noxgram stopped by ${signal} with value ${value}`);
     process.exit(exit_signal + value);
   });
   setTimeout(() => {

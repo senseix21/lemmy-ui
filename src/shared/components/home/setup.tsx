@@ -8,6 +8,7 @@ import {
   Register,
 } from "lemmy-js-client";
 import { I18NextService, UserService } from "../../services";
+import { BRAND_NAME } from "../../brand";
 import {
   EMPTY_REQUEST,
   HttpService,
@@ -69,7 +70,7 @@ export class Setup extends Component<
   }
 
   get documentTitle(): string {
-    return `${I18NextService.i18n.t("setup")} - Lemmy`;
+    return `${I18NextService.i18n.t("setup")} - ${BRAND_NAME}`;
   }
 
   render() {
