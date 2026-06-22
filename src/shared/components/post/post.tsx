@@ -100,6 +100,8 @@ import { CommentForm } from "../comment/comment-form";
 import { CommentNodes } from "../comment/comment-nodes";
 import { HtmlTags } from "../common/html-tags";
 import { Icon, Spinner } from "../common/icon";
+import { MainLayout } from "../common/main-layout";
+import { NavRail } from "../common/nav-rail";
 import { Sidebar } from "../community/sidebar";
 import { PostListing } from "./post-listing";
 import { getHttpBaseInternal } from "../../utils/env";
@@ -561,8 +563,15 @@ export class Post extends Component<PostRouteProps, PostState> {
         const res = this.state.postRes.data;
         const siteRes = this.state.siteRes;
         return (
-          <div className="row">
-            <div className="col-12 col-md-8 col-lg-9 mb-3">
+          <MainLayout
+            navRail={
+              <NavRail
+                myUserInfo={UserService.Instance.myUserInfo ?? undefined}
+              />
+            }
+            sidebar={this.sidebar()}
+          >
+            <div className="mb-3">
               <HtmlTags
                 title={this.documentTitle}
                 path={this.context.router.route.match.url}
@@ -644,17 +653,14 @@ export class Post extends Component<PostRouteProps, PostState> {
               {this.props.view === CommentViewType.Tree && this.commentsTree()}
               {this.props.view === CommentViewType.Flat && this.commentsFlat()}
             </div>
-            <aside className="d-none d-md-block col-md-4 col-lg-3">
-              {this.sidebar()}
-            </aside>
-          </div>
+          </MainLayout>
         );
       }
     }
   }
 
   render() {
-    return <div className="post container-lg">{this.renderPostRes()}</div>;
+    return <div className="post">{this.renderPostRes()}</div>;
   }
 
   sortRadios() {
