@@ -14,6 +14,7 @@ import {
 import { toast } from "../../toast";
 import { Icon } from "../common/icon";
 import { PictrsImage } from "../common/pictrs-image";
+import { brandFaviconUrl, BRAND_NAME } from "../../brand";
 import { Subscription } from "rxjs";
 import { tippyMixin } from "../mixins/tippy-mixin";
 
@@ -109,10 +110,14 @@ export class Navbar extends Component<NavbarProps, NavbarState> {
             className="d-flex align-items-center navbar-brand me-md-3"
             onMouseUp={linkEvent(this, handleCollapseClick)}
           >
-            {siteView?.site.icon && showAvatars() && (
-              <PictrsImage src={siteView.site.icon} icon />
-            )}
-            {siteView?.site.name}
+            <img
+              src={brandFaviconUrl}
+              alt={BRAND_NAME}
+              height="32"
+              width="32"
+              className="me-2 rounded"
+            />
+            {BRAND_NAME}
           </NavLink>
           {person && (
             <ul className="navbar-nav d-flex flex-row ms-auto d-md-none">
