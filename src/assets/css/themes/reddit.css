@@ -11867,4 +11867,53 @@ textarea.form-control-lg {
   background-color: #dae0e6;
 }
 
+.shadow-sm:has(.reddit-topbar) {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background-color: #ffffff;
+}
+
+.reddit-topbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #cccccc;
+  min-height: 56px;
+}
+.reddit-topbar .navbar-brand {
+  font-weight: 700;
+  color: #ff4500;
+}
+.reddit-topbar .reddit-search {
+  max-width: 690px;
+}
+.reddit-topbar .reddit-search .input-group-text {
+  border-radius: 50rem 0 0 50rem;
+  background-color: #f6f7f8;
+  border-color: transparent;
+  color: #878a8c;
+}
+.reddit-topbar .reddit-search .form-control {
+  border-radius: 0 50rem 50rem 0;
+  background-color: #f6f7f8;
+  border-color: transparent;
+}
+.reddit-topbar .reddit-search:focus-within .input-group-text,
+.reddit-topbar .reddit-search:focus-within .form-control {
+  background-color: #fff;
+  border-color: #ff4500;
+}
+.reddit-topbar .reddit-search:focus-within .input-group-text {
+  border-right-color: transparent;
+}
+.reddit-topbar .reddit-search:focus-within .form-control {
+  border-left-color: transparent;
+}
+.reddit-topbar .btn {
+  border-radius: 50rem;
+}
+
+.main-content-offset {
+  margin-top: 1rem;
+}
+
 /*# sourceMappingURL=reddit.css.map */

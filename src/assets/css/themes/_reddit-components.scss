@@ -5,3 +5,62 @@
 #app.lemmy-site {
   background-color: $body-bg;
 }
+
+// §2 Reddit sticky top bar
+.shadow-sm:has(.reddit-topbar) {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background-color: #ffffff;
+}
+
+.reddit-topbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid $border-color;
+  min-height: 56px;
+
+  .navbar-brand {
+    font-weight: 700;
+    color: $primary;
+  }
+
+  // Centered search becomes a wide rounded pill
+  .reddit-search {
+    max-width: 690px;
+
+    .input-group-text {
+      border-radius: $rounded-pill 0 0 $rounded-pill;
+      background-color: $gray-100;
+      border-color: transparent;
+      color: $gray-600;
+    }
+
+    .form-control {
+      border-radius: 0 $rounded-pill $rounded-pill 0;
+      background-color: $gray-100;
+      border-color: transparent;
+    }
+
+    &:focus-within {
+      .input-group-text,
+      .form-control {
+        background-color: #fff;
+        border-color: $primary;
+      }
+      .input-group-text {
+        border-right-color: transparent;
+      }
+      .form-control {
+        border-left-color: transparent;
+      }
+    }
+  }
+
+  .btn {
+    border-radius: $rounded-pill;
+  }
+}
+
+.main-content-offset {
+  margin-top: 1rem;
+}

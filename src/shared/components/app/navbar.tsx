@@ -26,6 +26,20 @@ interface NavbarState {
   unreadInboxCount: number;
   unreadReportCount: number;
   unreadApplicationCount: number;
+  searchText: string;
+}
+
+function handleSearchInput(i: Navbar, event: any) {
+  i.setState({ searchText: event.target.value });
+}
+
+function handleSearchSubmit(i: Navbar, event: any) {
+  event.preventDefault();
+  const q = i.state.searchText.trim();
+  i.context.router.history.push(
+    q.length > 0 ? `/search?q=${encodeURIComponent(q)}` : "/search",
+  );
+  handleCollapseClick(i);
 }
 
 function handleCollapseClick(i: Navbar) {
@@ -55,6 +69,7 @@ export class Navbar extends Component<NavbarProps, NavbarState> {
     unreadInboxCount: 0,
     unreadReportCount: 0,
     unreadApplicationCount: 0,
+    searchText: "",
   };
 
   constructor(props: any, context: any) {
@@ -99,7 +114,7 @@ export class Navbar extends Component<NavbarProps, NavbarState> {
     return (
       <div className="shadow-sm">
         <nav
-          className="navbar navbar-expand-md navbar-light p-0 px-3 container-lg"
+          className="navbar navbar-expand-md navbar-light p-0 px-3 container-lg reddit-topbar"
           id="navbar"
         >
           <NavLink
@@ -114,6 +129,25 @@ export class Navbar extends Component<NavbarProps, NavbarState> {
             )}
             {siteView?.site.name}
           </NavLink>
+          <form
+            className="reddit-search flex-grow-1 mx-md-3 my-2 my-md-0 order-3 order-md-0"
+            role="search"
+            onSubmit={linkEvent(this, handleSearchSubmit)}
+          >
+            <div className="input-group">
+              <span className="input-group-text bg-transparent border-end-0">
+                <Icon icon="search" />
+              </span>
+              <input
+                type="search"
+                className="form-control border-start-0 ps-0"
+                placeholder={I18NextService.i18n.t("search")}
+                aria-label={I18NextService.i18n.t("search")}
+                value={this.state.searchText}
+                onInput={linkEvent(this, handleSearchInput)}
+              />
+            </div>
+          </form>
           {person && (
             <ul className="navbar-nav d-flex flex-row ms-auto d-md-none">
               <li id="navMessages" className="nav-item nav-item-icon">

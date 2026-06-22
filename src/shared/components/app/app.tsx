@@ -122,7 +122,7 @@ export default class App extends Component<any, any> {
               <Theme defaultTheme={siteView.local_site.default_theme} />
             )}
             <Navbar siteRes={siteRes} />
-            <main className="mt-4 p-0 fl-1">
+            <main className="mt-4 p-0 fl-1 main-content-offset">
               <Switch>
                 {this.routes}
                 <Route component={ErrorPage} />
