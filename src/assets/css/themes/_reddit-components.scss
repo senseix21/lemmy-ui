@@ -166,3 +166,38 @@
     }
   }
 }
+
+// §7 Reddit comment threads — density, typography, hover.
+// Lemmy's colored thread lines (set via inline !important style from
+// colorList) are kept; we tighten spacing and add a row hover.
+.comments-reddit {
+  border-left-width: var(--comment-border-width);
+
+  .comment-node {
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+    border-radius: $border-radius-sm;
+    transition: background-color 0.1s ease;
+
+    &:hover {
+      background-color: rgba($gray-300, 0.45);
+    }
+  }
+
+  .md-div {
+    font-size: 0.875rem;
+    line-height: 1.45;
+
+    p {
+      margin-bottom: 0.4rem;
+    }
+  }
+}
+
+// The post page's comment area sits on a white surface like Reddit
+.post-comment-container {
+  background-color: #ffffff;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: 0.75rem;
+}

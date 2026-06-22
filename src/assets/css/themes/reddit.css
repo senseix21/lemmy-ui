@@ -12009,4 +12009,31 @@ textarea.form-control-lg {
   border-bottom-right-radius: 0.5rem;
 }
 
+.comments-reddit {
+  border-left-width: var(--comment-border-width);
+}
+.comments-reddit .comment-node {
+  padding-top: 0.35rem !important;
+  padding-bottom: 0.35rem !important;
+  border-radius: 0.25rem;
+  transition: background-color 0.1s ease;
+}
+.comments-reddit .comment-node:hover {
+  background-color: rgba(218, 224, 230, 0.45);
+}
+.comments-reddit .md-div {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+.comments-reddit .md-div p {
+  margin-bottom: 0.4rem;
+}
+
+.post-comment-container {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
 /*# sourceMappingURL=reddit.css.map */
