@@ -1,6 +1,6 @@
 import { Site } from "lemmy-js-client";
-import { fetchIconPng } from "./fetch-icon-png";
 import { getStaticDir } from "@utils/env";
+import { BRAND_NAME } from "../../shared/brand";
 
 type Icon = { sizes: string; src: string; type: string; purpose: string };
 const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
@@ -23,35 +23,13 @@ function generateDefaultIcons() {
 
 export default async function (site: Site) {
   if (!icons) {
-    try {
-      const icon = site.icon ? await fetchIconPng(site.icon) : null;
-
-      if (icon) {
-        icons = await Promise.all(
-          iconSizes.map(async size => {
-            const sharp = (await import("sharp")).default;
-            const src = `data:image/png:base64,${await sharp(icon)
-              .resize(size, size)
-              .png()
-              .toBuffer()
-              .then(buf => buf.toString("base64"))}`;
-
-            return mapIcon(src, size);
-          }),
-        );
-      } else {
-        icons = generateDefaultIcons();
-      }
-    } catch {
-      console.log(
-        `Failed to fetch site logo for manifest icon. Using default icon`,
-      );
-      icons = generateDefaultIcons();
-    }
+    // Always use the noxgram default icons, regardless of backend site icon.
+    icons = generateDefaultIcons();
   }
 
   return {
-    name: site.name,
+    name: BRAND_NAME,
+    short_name: BRAND_NAME,
     description: site.description ?? "A link aggregator for the fediverse",
     start_url: "/",
     scope: "/",

@@ -2,11 +2,10 @@ import { getStaticDir } from "@utils/env";
 import { Helmet } from "inferno-helmet";
 import { renderToString } from "inferno-server";
 import serialize from "serialize-javascript";
-import sharp from "sharp";
-import { favIconPngUrl, favIconUrl } from "../../shared/config";
+import { favIconPngUrl } from "../../shared/config";
+import { BRAND_NAME, brandFaviconUrl } from "../../shared/brand";
 import { IsoDataOptionalSite } from "../../shared/interfaces";
 import { buildThemeList } from "./build-themes-list";
-import { fetchIconPng } from "./fetch-icon-png";
 import { findTranslationChunkNames } from "../../shared/services/I18NextService";
 import { findDateFnsChunkNames } from "../../shared/utils/app/setup-date-fns";
 
@@ -20,8 +19,6 @@ export async function createSsrHtml(
   cspNonce: string,
   userLanguages: readonly string[],
 ) {
-  const site = isoData.site_res;
-
   const fallbackTheme = `<link rel="stylesheet" type="text/css" href="/css/themes/${
     (await buildThemeList())[0]
   }.css" />`;
@@ -33,29 +30,8 @@ export async function createSsrHtml(
   );
 
   if (!appleTouchIcon) {
-    try {
-      appleTouchIcon = site?.site_view.site.icon
-        ? `data:image/png;base64,${await sharp(
-            await fetchIconPng(site.site_view.site.icon),
-          )
-            .resize(180, 180)
-            .extend({
-              bottom: 20,
-              top: 20,
-              left: 20,
-              right: 20,
-              background: "#222222",
-            })
-            .png()
-            .toBuffer()
-            .then(buf => buf.toString("base64"))}`
-        : favIconPngUrl;
-    } catch {
-      console.log(
-        "Could not fetch site logo for apple touch icon. Using default icon.",
-      );
-      appleTouchIcon = favIconPngUrl;
-    }
+    // Force the noxgram apple-touch-icon regardless of backend site icon.
+    appleTouchIcon = favIconPngUrl;
   }
 
   const erudaStr =
@@ -117,14 +93,14 @@ export async function createSsrHtml(
     </style>
 
     <!-- Required meta tags -->
-    <meta name="Description" content="Lemmy">
+    <meta name="Description" content="${BRAND_NAME}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link
        id="favicon"
        rel="shortcut icon"
        type="image/x-icon"
-       href=${site?.site_view.site.icon ?? favIconUrl}
+       href=${brandFaviconUrl}
      />
   
     <!-- Web app manifest -->
