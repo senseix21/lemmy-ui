@@ -64,3 +64,54 @@
 .main-content-offset {
   margin-top: 1rem;
 }
+
+// §3 Reddit three-column layout + nav rail
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: minmax(0, 1fr) 312px; // content + right sidebar
+  }
+  @media (min-width: 992px) {
+    grid-template-columns: 240px minmax(0, 1fr) 312px; // rail + content + sidebar
+  }
+}
+
+.main-layout__content {
+  min-width: 0; // prevent grid blowout from long content
+}
+
+.main-layout__sidebar > * {
+  position: sticky;
+  top: 72px;
+}
+
+.nav-rail {
+  position: sticky;
+  top: 72px;
+
+  .nav-rail__link {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.75rem;
+    border-radius: $border-radius;
+    color: $body-color;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $gray-200;
+    }
+  }
+
+  .nav-rail__community {
+    padding: 0.3rem 0.75rem;
+    border-radius: $border-radius;
+
+    &:hover {
+      background-color: $gray-200;
+    }
+  }
+}

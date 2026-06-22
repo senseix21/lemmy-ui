@@ -11916,4 +11916,53 @@ textarea.form-control-lg {
   margin-top: 1rem;
 }
 
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .main-layout {
+    grid-template-columns: minmax(0, 1fr) 312px;
+  }
+}
+@media (min-width: 992px) {
+  .main-layout {
+    grid-template-columns: 240px minmax(0, 1fr) 312px;
+  }
+}
+
+.main-layout__content {
+  min-width: 0;
+}
+
+.main-layout__sidebar > * {
+  position: sticky;
+  top: 72px;
+}
+
+.nav-rail {
+  position: sticky;
+  top: 72px;
+}
+.nav-rail .nav-rail__link {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  color: #1a1a1b;
+  text-decoration: none;
+}
+.nav-rail .nav-rail__link:hover {
+  background-color: #edeff1;
+}
+.nav-rail .nav-rail__community {
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.5rem;
+}
+.nav-rail .nav-rail__community:hover {
+  background-color: #edeff1;
+}
+
 /*# sourceMappingURL=reddit.css.map */
