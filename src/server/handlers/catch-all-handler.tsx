@@ -7,6 +7,7 @@ import { Match } from "inferno-router/dist/Route";
 import { renderToString } from "inferno-server";
 import { GetSiteResponse, LemmyHttp } from "lemmy-js-client";
 import App from "../../shared/components/app/app";
+import { applyBrand } from "../../shared/brand";
 import {
   InitialFetchRequest,
   IsoDataOptionalSite,
@@ -81,6 +82,7 @@ export default async (req: Request, res: Response) => {
 
     if (try_site.state === "success") {
       site = try_site.data;
+      applyBrand(site);
       initializeSite(site);
       LanguageService.updateLanguages(languages);
 

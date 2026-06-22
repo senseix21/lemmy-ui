@@ -1,4 +1,5 @@
 import { initializeSite } from "@utils/app";
+import { applyBrand } from "../shared/brand";
 import { hydrate } from "inferno-hydrate";
 import { BrowserRouter } from "inferno-router";
 import App from "../shared/components/app/app";
@@ -19,6 +20,7 @@ async function startClient() {
 
   window.history.scrollRestoration = "manual";
 
+  applyBrand(window.isoData.site_res);
   initializeSite(window.isoData.site_res);
 
   lazyHighlightjs.enableLazyLoading();
