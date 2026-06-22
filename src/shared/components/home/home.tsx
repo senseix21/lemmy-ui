@@ -93,6 +93,8 @@ import { CommentNodes } from "../comment/comment-nodes";
 import { DataTypeSelect } from "../common/data-type-select";
 import { HtmlTags } from "../common/html-tags";
 import { Icon } from "../common/icon";
+import { MainLayout } from "../common/main-layout";
+import { NavRail } from "../common/nav-rail";
 import { ListingTypeSelect } from "../common/listing-type-select";
 import { SortSelect } from "../common/sort-select";
 import { CommunityLink } from "../community/community-link";
@@ -405,23 +407,25 @@ export class Home extends Component<HomeRouteProps, HomeState> {
           path={this.context.router.route.match.url}
         />
         {site_setup && (
-          <div className="row">
-            <div className="col-12 col-md-8 col-lg-9">
-              {tagline && (
-                <div
-                  id="tagline"
-                  dangerouslySetInnerHTML={mdToHtml(tagline, () =>
-                    this.forceUpdate(),
-                  )}
-                ></div>
-              )}
-              <div className="d-block d-md-none">{this.mobileView}</div>
-              {this.posts}
-            </div>
-            <aside className="d-none d-md-block col-md-4 col-lg-3">
-              {this.mySidebar}
-            </aside>
-          </div>
+          <MainLayout
+            navRail={
+              <NavRail
+                myUserInfo={UserService.Instance.myUserInfo ?? undefined}
+              />
+            }
+            sidebar={this.mySidebar}
+          >
+            {tagline && (
+              <div
+                id="tagline"
+                dangerouslySetInnerHTML={mdToHtml(tagline, () =>
+                  this.forceUpdate(),
+                )}
+              ></div>
+            )}
+            <div className="d-block d-md-none">{this.mobileView}</div>
+            {this.posts}
+          </MainLayout>
         )}
       </div>
     );
