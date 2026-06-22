@@ -149,7 +149,7 @@ export class Theme extends Component<Props, State> {
             <link
               rel="stylesheet"
               type="text/css"
-              href="/css/themes/litely.css"
+              href="/css/themes/reddit.css"
               id="default-light"
               media="(prefers-color-scheme: light)"
             />

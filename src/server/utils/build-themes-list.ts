@@ -5,6 +5,7 @@ const extraThemesFolder =
   process.env["LEMMY_UI_EXTRA_THEMES_FOLDER"] || "./extra_themes";
 
 const themes: ReadonlyArray<string> = [
+  "reddit",
   "darkly",
   "darkly-red",
   "darkly-compact",

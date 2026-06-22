@@ -1,0 +1,62 @@
+@import "./variables";
+
+// Reddit palette
+$gray-100: #f6f7f8;
+$gray-200: #edeff1;
+$gray-300: #dae0e6;
+$gray-600: #878a8c;
+$gray-700: #1a1a1b;
+$black: #1a1a1b;
+
+$orange: #ff4500; // reddit upvote / brand
+$blue: #0079d3; // reddit link blue
+$periwinkle: #7193ff; // downvote
+
+$primary: $orange;
+$secondary: $blue;
+$success: #46d160;
+$info: $blue;
+$danger: #ea0027;
+
+$body-color: $gray-700;
+$body-bg: $gray-300; // #dae0e6 app background
+$link-color: $blue;
+$link-hover-color: darken($blue, 10%);
+$border-color: #cccccc;
+$mark-bg: rgb(255, 252, 239);
+$headings-color: $gray-700;
+
+$font-family-sans-serif:
+  "IBM Plex Sans",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Noto Sans",
+  Helvetica,
+  Arial,
+  sans-serif;
+$font-size-base: 0.875rem;
+$font-weight-bold: 600;
+
+// Cards = white surfaces (the feed sits on the grey body-bg)
+$card-color: $gray-700;
+$card-cap-color: $gray-700;
+$card-bg: #ffffff;
+$card-border-color: $border-color;
+$card-border-radius: 0.5rem;
+
+$navbar-light-color: $gray-600;
+$navbar-light-hover-color: $gray-700;
+$navbar-light-active-color: $gray-700;
+
+$input-btn-focus-color: rgba($primary, 0.4);
+$btn-border-radius: 1.5rem; // reddit pill buttons
+$btn-border-radius-lg: 1.5rem;
+$btn-border-radius-sm: 1.5rem;
+
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-sm: 0.25rem;
+$rounded-pill: 50rem;
+
+$hr-border-color: $border-color;
