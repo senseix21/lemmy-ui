@@ -1,7 +1,8 @@
 import { Component } from "inferno";
 import { NavLink } from "inferno-router";
 import { GetSiteResponse } from "lemmy-js-client";
-import { docsUrl, joinLemmyUrl, repoUrl } from "../../config";
+import { docsUrl, repoUrl } from "../../config";
+import { BRAND_NAME, BRAND_URL } from "../../brand";
 import { I18NextService } from "../../services";
 import { VERSION } from "../../version";
 
@@ -57,8 +58,8 @@ export class Footer extends Component<FooterProps, any> {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href={joinLemmyUrl}>
-                {new URL(joinLemmyUrl).hostname}
+              <a className="nav-link" href={BRAND_URL}>
+                {BRAND_NAME}
               </a>
             </li>
           </ul>
